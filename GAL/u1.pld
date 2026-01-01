@@ -1,0 +1,89 @@
+Name     PCRAMXpander;
+Partno   U1;
+Date     01/01/2026;
+Revision 01;
+Designer Jeff;
+Company  Homebrew;
+Assembly PCRAMXpander;
+Location U1;
+Device   g16v8;
+
+/* ------------------------------------------------------------------------- */
+/* Inputs                                                                    */
+/* ------------------------------------------------------------------------- */
+Pin 1  = LA23;    /* Address Bit 23 (MSB of 1MB Block) */
+Pin 2  = LA22;    /* Address Bit 22 */
+Pin 3  = LA21;    /* Address Bit 21 */
+Pin 4  = LA20;    /* Address Bit 20 (LSB of 1MB Block) */
+
+Pin 5  = JP1;     /* Jumper 1 (Low Bit)  - Pull-up default High */
+Pin 6  = JP2;     /* Jumper 2 (High Bit) - Pull-up default High */
+
+/* ------------------------------------------------------------------------- */
+/* Outputs                                                                   */
+/* ------------------------------------------------------------------------- */
+Pin 13 = !CS_LO;   /* Chip Select RAM 1 (Lower 4MB) - Active Low */
+Pin 15 = !CS_HI;   /* Chip Select RAM 2 (Upper 4MB) - Active Low */
+
+Pin 16 = !TRANS;   /* Transceiver Enable - Active Low */
+
+/* ISA Bus Shared Signals (Simulated Open Collector) */
+Pin 12 = !MEMCS16; /* 16-Bit Memory Assert - Active Low */
+Pin 14 = !TURBO;   /* Zero Wait State Assert - Active Low */
+
+/* ------------------------------------------------------------------------- */
+/* Logic Definitions                                                         */
+/* ------------------------------------------------------------------------- */
+
+/* Define Address Field as a 4-bit Hex Value (0 to F) representing 1MB chunks */
+FIELD ADDR = [LA23..LA20];
+
+/* Define Jumper Modes (Inverted logic: Jumper ON = Ground = 0) */
+/* Table:
+   JP2(1) JP1(1) -> 1MB Start (Off/Off)
+   JP2(1) JP1(0) -> 2MB Start (Off/On)
+   JP2(0) JP1(1) -> 4MB Start (On/Off)
+   JP2(0) JP1(0) -> 8MB Start (On/On)
+*/
+
+MODE_1MB =  JP2 &  JP1;
+MODE_2MB =  JP2 & !JP1;
+MODE_4MB = !JP2 &  JP1;
+MODE_8MB = !JP2 & !JP1;
+
+/* ------------------------------------------------------------------------- */
+/* Logic Equations                                                           */
+/* ------------------------------------------------------------------------- */
+
+/* CS_LO: Active for the first 4MB block starting at the Configured Address */
+CS_LO = (MODE_1MB & ADDR:[1..4])    /* 1MB to 5MB */
+      # (MODE_2MB & ADDR:[2..5])    /* 2MB to 6MB */
+      # (MODE_4MB & ADDR:[4..7])    /* 4MB to 8MB */
+      # (MODE_8MB & ADDR:[8..B]);   /* 8MB to 12MB */
+
+/* CS_HI: Active for the second 4MB block immediately following CS_LO */
+CS_HI = (MODE_1MB & ADDR:[5..8])    /* 5MB to 9MB */
+      # (MODE_2MB & ADDR:[6..9])    /* 6MB to 10MB */
+      # (MODE_4MB & ADDR:[8..B])    /* 8MB to 12MB */
+      # (MODE_8MB & ADDR:[C..F]);   /* 12MB to 16MB */
+
+/* TRANS: Enable Data Buffers whenever we are selected */
+TRANS = CS_LO # CS_HI;
+
+/* ------------------------------------------------------------------------- */
+/* Open Collector Simulation for ISA Bus Signals                             */
+/* ------------------------------------------------------------------------- */
+/* The ISA bus requires these signals to be Open Collector (float high).      */
+/* A standard GAL push-pull output would cause a short circuit.              */
+/* Trick: We permanently set the DATA to 0 (Ground), and use the LOGIC       */
+/* to control the OUTPUT ENABLE (OE).                                        */
+/* */
+/* If Selected -> OE is ON -> Output drives Ground (Logic 0).                */
+/* If Idle     -> OE is OFF -> Output floats (Logic 1 via Pull-up).          */
+/* ------------------------------------------------------------------------- */
+
+MEMCS16.D  = 'b'0;
+MEMCS16.OE = CS_LO # CS_HI;
+
+TURBO.D    = 'b'0;
+TURBO.OE   = CS_LO # CS_HI;
