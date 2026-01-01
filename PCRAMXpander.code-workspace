@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"C_Cpp.codeAnalysis.clangTidy.path": "/Users/jeff/llvm-mos/bin/clang-tidy"
+	}
+}
