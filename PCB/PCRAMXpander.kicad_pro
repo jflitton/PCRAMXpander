@@ -232,6 +232,10 @@
         "Pin 12 relabeled to NOWS"
       ],
       [
+        "lib_symbol_mismatch|2298700|1866900|03e6a67f-cdbe-45f2-bf2e-f1eebcb49303|00000000-0000-0000-0000-000000000000|||",
+        ""
+      ],
+      [
         "pin_not_connected|1346200|1346200|9e6c6cff-31aa-4e77-9012-edac3e0cd0ce|00000000-0000-0000-0000-000000000000|/1cf6e2a4-b983-419d-81f7-8fbd15ee10a7|/1cf6e2a4-b983-419d-81f7-8fbd15ee10a7|",
         ""
       ],

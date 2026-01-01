@@ -1,16 +1,16 @@
 
 (kicad_symbol_lib (version 20211014) (generator kicad_symbol_editor)
-  (symbol "SN74LVC16245ADGGR" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
+  (symbol "SN74LVCR16245ADGGR" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
     (property "Reference" "U" (id 0) (at -12.7 49.26 0.0)
       (effects (font (size 1.27 1.27)) (justify bottom left))
     )
-    (property "Value" "SN74LVC16245ADGGR" (id 1) (at -12.7 -52.26 0.0)
+    (property "Value" "SN74LVCR16245ADGGR" (id 1) (at -12.7 -52.26 0.0)
       (effects (font (size 1.27 1.27)) (justify bottom left))
     )
-    (property "Footprint" "SN74LVC16245ADGGR:SOP50P810X120-48N" (id 2) (at 0 0 0)
+    (property "Footprint" "SN74LVCR16245ADGGR:SOP50P810X120-48N" (id 2) (at 0 0 0)
       (effects (font (size 1.27 1.27)) (justify bottom) hide)
     )
-    (symbol "SN74LVC16245ADGGR_0_0"
+    (symbol "SN74LVCR16245ADGGR_0_0"
       (rectangle (start -12.7 -48.26) (end 12.7 48.26)
         (stroke (width 0.41)) (fill (type background))
       )
