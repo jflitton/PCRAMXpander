@@ -38,8 +38,8 @@
         "other_text_upright": false,
         "pads": {
           "drill": 0.0,
-          "height": 7.62,
-          "width": 1.78
+          "height": 1.749999,
+          "width": 0.299999
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -48,7 +48,7 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.5
+          "min_clearance": 0.25
         }
       },
       "diff_pair_dimensions": [
@@ -188,7 +188,8 @@
       ],
       "track_widths": [
         0.0,
-        0.2
+        0.25,
+        1.75
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -687,7 +688,7 @@
       },
       {
         "bus_width": 20,
-        "clearance": 0.25,
+        "clearance": 0.2,
         "line_style": 0,
         "name": "3.3V",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
@@ -700,7 +701,7 @@
       },
       {
         "bus_width": 20,
-        "clearance": 0.25,
+        "clearance": 0.2,
         "line_style": 0,
         "name": "5V",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
@@ -713,7 +714,7 @@
       },
       {
         "bus_width": 20,
-        "clearance": 0.25,
+        "clearance": 0.2,
         "name": "GND",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 0,
