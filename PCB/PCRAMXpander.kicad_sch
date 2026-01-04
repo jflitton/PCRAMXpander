@@ -11789,23 +11789,23 @@
 		)
 	)
 	(global_label "OE"
-		(shape output)
-		(at 334.01 113.03 90)
+		(shape input)
+		(at 334.01 107.95 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "6bc326c0-fb49-4309-ab8e-1aca0174f5fb")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 334.01 107.5653 90)
+			(at 334.01 113.4147 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 				(hide yes)
 			)
 		)
