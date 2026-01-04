@@ -4,7 +4,6 @@
   (lib (name "AS6C3216A_2026-01-01_18-42-19")(type "KiCad")(uri "${KIPRJMOD}/lib/AS6C3216A/AS6C3216A_2026-01-01_18-42-19.kicad_sym")(options "")(descr ""))
   (lib (name "SN74LVC16244ADGGR_2026-01-01_18-40-32")(type "KiCad")(uri "${KIPRJMOD}/lib/SN74LVC16244ADGGR/SN74LVC16244ADGGR_2026-01-01_18-40-32.kicad_sym")(options "")(descr ""))
   (lib (name "LDL1117S33R")(type "KiCad")(uri "${KIPRJMOD}/lib/LDL1117S33R/LDL1117S33R.kicad_sym")(options "")(descr ""))
-  (lib (name "EXB-2HV330JV")(type "KiCad")(uri "${KIPRJMOD}/lib/EXB_2HV330JV/EXB-2HV330JV.kicad_sym")(options "")(descr ""))
-  (lib (name "EXB-E10C103J")(type "KiCad")(uri "${KIPRJMOD}/lib/EXB_E10C103J/EXB-E10C103J.kicad_sym")(options "")(descr ""))
   (lib (name "SN74LVCR16245ADGGR")(type "KiCad")(uri "${KIPRJMOD}/lib/SN74LVCR16245ADGGR/SN74LVCR16245ADGGR.kicad_sym")(options "")(descr ""))
+  (lib (name "CSC05A0110K0GEK_2026-01-04_16-49-05")(type "KiCad")(uri "${KIPRJMOD}/lib/CSC05A0110K0GEK/CSC05A0110K0GEK_2026-01-04_16-49-05.kicad_sym")(options "")(descr ""))
 )
