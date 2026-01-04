@@ -13066,7 +13066,7 @@
 	)
 	(global_label "WE"
 		(shape output)
-		(at 350.52 69.85 0)
+		(at 350.52 85.09 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13076,7 +13076,7 @@
 		)
 		(uuid "9641b4c6-7a52-4d68-a4bb-8bffc8102ab8")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 356.1056 69.85 0)
+			(at 356.1056 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13594,7 +13594,7 @@
 	)
 	(global_label "C2E"
 		(shape input)
-		(at 350.52 85.09 0)
+		(at 350.52 69.85 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13604,7 +13604,7 @@
 		)
 		(uuid "b23a002c-04c4-4dab-a655-ba9cbfd870d4")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 357.1337 85.09 0)
+			(at 357.1337 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
