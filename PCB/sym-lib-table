@@ -6,4 +6,6 @@
   (lib (name "LDL1117S33R")(type "KiCad")(uri "${KIPRJMOD}/lib/LDL1117S33R/LDL1117S33R.kicad_sym")(options "")(descr ""))
   (lib (name "SN74LVCR16245ADGGR")(type "KiCad")(uri "${KIPRJMOD}/lib/SN74LVCR16245ADGGR/SN74LVCR16245ADGGR.kicad_sym")(options "")(descr ""))
   (lib (name "CSC05A0110K0GEK_2026-01-04_16-49-05")(type "KiCad")(uri "${KIPRJMOD}/lib/CSC05A0110K0GEK/CSC05A0110K0GEK_2026-01-04_16-49-05.kicad_sym")(options "")(descr ""))
+  (lib (name "SN74LVC541APWR")(type "KiCad")(uri "${KIPRJMOD}/lib/SN74LVC541APWR/SN74LVC541APWR.kicad_sym")(options "")(descr ""))
+  (lib (name "SN74LVC573APWR")(type "KiCad")(uri "${KIPRJMOD}/lib/SN74LVC573APWR/SN74LVC573APWR.kicad_sym")(options "")(descr ""))
 )

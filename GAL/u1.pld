@@ -1,89 +1,90 @@
-Name     PCRAMXpander;
-Partno   U1;
-Date     01/01/2026;
-Revision 01;
-Designer Jeff;
-Company  Homebrew;
-Assembly PCRAMXpander;
-Location U1;
-Device   g16v8;
+Name     PCRAMXpander ;
+Partno   U1 ;
+Date     2026-01-11 ;
+Revision 01 ;
+Designer Jeff ;
+Company  VintageHacks ;
+Assembly PCRAMXpander ;
+Location U1 ;
+Device   G16V8 ;
 
-/* ------------------------------------------------------------------------- */
-/* Inputs                                                                    */
-/* ------------------------------------------------------------------------- */
-Pin 1  = LA23;    /* Address Bit 23 (MSB of 1MB Block) */
-Pin 2  = LA22;    /* Address Bit 22 */
-Pin 3  = LA21;    /* Address Bit 21 */
-Pin 4  = LA20;    /* Address Bit 20 (LSB of 1MB Block) */
+/* INPUTS */
+/* ISA Address Lines LA23..LA20 determine the 1MB block */
+Pin 1  = LA23;
+Pin 2  = LA22;
+Pin 3  = LA21;
+Pin 4  = LA20;
 
-Pin 5  = JP1;     /* Jumper 1 (Low Bit)  - Pull-up default High */
-Pin 6  = JP2;     /* Jumper 2 (High Bit) - Pull-up default High */
+/* Configuration Jumpers (Active Low when closed to GND) */
+Pin 5  = JP1;  /* MB Memory 1 */
+Pin 6  = JP2;  /* MB Memory 2 */
 
-/* ------------------------------------------------------------------------- */
-/* Outputs                                                                   */
-/* ------------------------------------------------------------------------- */
-Pin 13 = !CS_LO;   /* Chip Select RAM 1 (Lower 4MB) - Active Low */
-Pin 15 = !CS_HI;   /* Chip Select RAM 2 (Upper 4MB) - Active Low */
+/* ISA Control */
+Pin 7  = !REFRESH; /* Active Low input */
 
-Pin 16 = !TRANS;   /* Transceiver Enable - Active Low */
+/* Pin 11 tied to GND in netlist, used as OE reference if needed, or ignored */
+/* In simple mode logic, this is just an input we don't use. */
+Pin 11 = GND_PIN; 
 
-/* ISA Bus Shared Signals (Simulated Open Collector) */
-Pin 12 = !MEMCS16; /* 16-Bit Memory Assert - Active Low */
-Pin 14 = !TURBO;   /* Zero Wait State Assert - Active Low */
+/* OUTPUTS */
+/* Active Low Chip Selects for the RAM banks */
+Pin 13 = !CS_LO;    /* Low Bank (First 4MB) */
+Pin 15 = !CS_HI;    /* High Bank (Second 4MB) */
 
-/* ------------------------------------------------------------------------- */
-/* Logic Definitions                                                         */
-/* ------------------------------------------------------------------------- */
+/* Transceiver Enable */
+Pin 16 = !TRANS_EN; /* Enables the 74LVCR16245 Data buffer */
 
-/* Define Address Field as a 4-bit Hex Value (0 to F) representing 1MB chunks */
-FIELD ADDR = [LA23..LA20];
+/* Open Collector Outputs (Emulated via OE control) */
+Pin 12 = MEMCS16;   /* Tells ISA bus this is a 16-bit device */
+Pin 14 = NOWS;      /* Zero Wait State / Turbo request */
 
-/* Define Jumper Modes (Inverted logic: Jumper ON = Ground = 0) */
-/* Table:
-   JP2(1) JP1(1) -> 1MB Start (Off/Off)
-   JP2(1) JP1(0) -> 2MB Start (Off/On)
-   JP2(0) JP1(1) -> 4MB Start (On/Off)
-   JP2(0) JP1(0) -> 8MB Start (On/On)
-*/
+/* INTERMEDIATE DEFINITIONS */
 
-MODE_1MB =  JP2 &  JP1;
-MODE_2MB =  JP2 & !JP1;
-MODE_4MB = !JP2 &  JP1;
-MODE_8MB = !JP2 & !JP1;
+/* 4-bit Address Value from bus */
+FIELD Address = [LA23..LA20];
 
-/* ------------------------------------------------------------------------- */
-/* Logic Equations                                                           */
-/* ------------------------------------------------------------------------- */
+/* Define 1MB blocks (Hex 0-F) */
+/* Example: 1MB = 0x1 (LA23=0,22=0,21=0,20=1) */
+/* Banks cover 4MB each. */
 
-/* CS_LO: Active for the first 4MB block starting at the Configured Address */
-CS_LO = (MODE_1MB & ADDR:[1..4])    /* 1MB to 5MB */
-      # (MODE_2MB & ADDR:[2..5])    /* 2MB to 6MB */
-      # (MODE_4MB & ADDR:[4..7])    /* 4MB to 8MB */
-      # (MODE_8MB & ADDR:[8..B]);   /* 8MB to 12MB */
+/* Jumper Logic for Base Address */
+/* JP: 0=Jumper On (GND), 1=Jumper Off (Pullup) */
 
-/* CS_HI: Active for the second 4MB block immediately following CS_LO */
-CS_HI = (MODE_1MB & ADDR:[5..8])    /* 5MB to 9MB */
-      # (MODE_2MB & ADDR:[6..9])    /* 6MB to 10MB */
-      # (MODE_4MB & ADDR:[8..B])    /* 8MB to 12MB */
-      # (MODE_8MB & ADDR:[C..F]);   /* 12MB to 16MB */
+/* CONFIG 1: Base 1MB (JP1=0, JP2=0) -> Range 1MB-9MB */
+Range_1MB_LO = !JP1 & !JP2 & Address:[1..4];
+Range_1MB_HI = !JP1 & !JP2 & Address:[5..8];
 
-/* TRANS: Enable Data Buffers whenever we are selected */
-TRANS = CS_LO # CS_HI;
+/* CONFIG 2: Base 2MB (JP1=1, JP2=0) -> Range 2MB-10MB */
+Range_2MB_LO =  JP1 & !JP2 & Address:[2..5];
+Range_2MB_HI =  JP1 & !JP2 & Address:[6..9];
 
-/* ------------------------------------------------------------------------- */
-/* Open Collector Simulation for ISA Bus Signals                             */
-/* ------------------------------------------------------------------------- */
-/* The ISA bus requires these signals to be Open Collector (float high).      */
-/* A standard GAL push-pull output would cause a short circuit.              */
-/* Trick: We permanently set the DATA to 0 (Ground), and use the LOGIC       */
-/* to control the OUTPUT ENABLE (OE).                                        */
-/* */
-/* If Selected -> OE is ON -> Output drives Ground (Logic 0).                */
-/* If Idle     -> OE is OFF -> Output floats (Logic 1 via Pull-up).          */
-/* ------------------------------------------------------------------------- */
+/* CONFIG 3: Base 4MB (JP1=0, JP2=1) -> Range 4MB-12MB */
+Range_4MB_LO = !JP1 &  JP2 & Address:[4..7];
+Range_4MB_HI = !JP1 &  JP2 & Address:[8..11];
 
-MEMCS16.D  = 'b'0;
-MEMCS16.OE = CS_LO # CS_HI;
+/* CONFIG 4: Base 8MB (JP1=1, JP2=1) -> Range 8MB-16MB */
+Range_8MB_LO =  JP1 &  JP2 & Address:[8..11];
+Range_8MB_HI =  JP1 &  JP2 & Address:[12..15];
 
-TURBO.D    = 'b'0;
-TURBO.OE   = CS_LO # CS_HI;
+/* Combine ranges into Bank Hits */
+HIT_LO = Range_1MB_LO # Range_2MB_LO # Range_4MB_LO # Range_8MB_LO;
+HIT_HI = Range_1MB_HI # Range_2MB_HI # Range_4MB_HI # Range_8MB_HI;
+
+/* LOGIC EQUATIONS */
+
+/* Chip Selects: Active when Address Hits & Not Refreshing */
+CS_LO  = HIT_LO & REFRESH;
+CS_HI  = HIT_HI & REFRESH;
+
+/* Transceiver Enable: Active for either bank */
+TRANS_EN = (HIT_LO # HIT_HI) & REFRESH;
+
+/* MEMCS16 Implementation (Open Collector Emulation) */
+/* Drive pin LOW (0), but only ENABLE the pin when logic is true */
+MEMCS16    = 'b'0; 
+MEMCS16.oe = (HIT_LO # HIT_HI) & REFRESH;
+
+/* NOWS Implementation (Open Collector Emulation) */
+/* Same logic as MEMCS16 */
+NOWS       = 'b'0;
+NOWS.oe    = (HIT_LO # HIT_HI) & REFRESH;
