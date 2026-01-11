@@ -1,7 +1,7 @@
 Name     PCRAMXpander ;
 Partno   U1 ;
 Date     2026-01-11 ;
-Revision 01 ;
+Revision 02 ;
 Designer Jeff ;
 Company  VintageHacks ;
 Assembly PCRAMXpander ;
@@ -15,76 +15,70 @@ Pin 2  = LA22;
 Pin 3  = LA21;
 Pin 4  = LA20;
 
-/* Configuration Jumpers (Active Low when closed to GND) */
-Pin 5  = JP1;  /* MB Memory 1 */
-Pin 6  = JP2;  /* MB Memory 2 */
+/* Configuration Jumpers */
+/* Logic: 0 (GND) = Closed, 1 (Pullup) = Open */
+Pin 5  = JP1;
+Pin 6  = JP2;
 
 /* ISA Control */
-Pin 7  = !REFRESH; /* Active Low input */
+Pin 7  = nREFRESH; /* ISA REFRESH is Active Low, so this means we're not refreshing when true */
+Pin 8  = RESET;    /* ISA RESET is Active High */
 
-/* Pin 11 tied to GND in netlist, used as OE reference if needed, or ignored */
-/* In simple mode logic, this is just an input we don't use. */
+/* Unused/Grounded Pins */
+Pin 9  = GND_PIN;
 Pin 11 = GND_PIN; 
 
 /* OUTPUTS */
 /* Active Low Chip Selects for the RAM banks */
-Pin 13 = !CS_LO;    /* Low Bank (First 4MB) */
-Pin 15 = !CS_HI;    /* High Bank (Second 4MB) */
-
-/* Transceiver Enable */
-Pin 16 = !TRANS_EN; /* Enables the 74LVCR16245 Data buffer */
-
+Pin 13 = !CS_LO;    
+Pin 15 = !CS_HI;    
+Pin 16 = !TRANS_EN; /* Enables U2 (Data buffer) */
 /* Open Collector Outputs (Emulated via OE control) */
-Pin 12 = MEMCS16;   /* Tells ISA bus this is a 16-bit device */
-Pin 14 = NOWS;      /* Zero Wait State / Turbo request */
+Pin 12 = MEMCS16;   
+Pin 14 = NOWS;      
 
-/* INTERMEDIATE DEFINITIONS */
-
-/* 4-bit Address Value from bus */
+/* DEFINITIONS */
 FIELD Address = [LA23..LA20];
 
-/* Define 1MB blocks (Hex 0-F) */
-/* Example: 1MB = 0x1 (LA23=0,22=0,21=0,20=1) */
-/* Banks cover 4MB each. */
+/* Valid Access: */
+/* 1. nREFRESH is High (Not refreshing) */
+/* 2. RESET is Low (Not resetting) */
+Valid = nREFRESH & !RESET;
 
-/* Jumper Logic for Base Address */
-/* JP: 0=Jumper On (GND), 1=Jumper Off (Pullup) */
-
-/* CONFIG 1: Base 1MB (JP1=0, JP2=0) -> Range 1MB-9MB */
+/* CONFIG 1: Base 1MB (JP1 Closed, JP2 Closed) */
+/* Range 1MB-9MB */
 Range_1MB_LO = !JP1 & !JP2 & Address:[1..4];
 Range_1MB_HI = !JP1 & !JP2 & Address:[5..8];
 
-/* CONFIG 2: Base 2MB (JP1=1, JP2=0) -> Range 2MB-10MB */
+/* CONFIG 2: Base 2MB (JP1 Open, JP2 Closed) */
+/* Range 2MB-10MB */
 Range_2MB_LO =  JP1 & !JP2 & Address:[2..5];
 Range_2MB_HI =  JP1 & !JP2 & Address:[6..9];
 
-/* CONFIG 3: Base 4MB (JP1=0, JP2=1) -> Range 4MB-12MB */
+/* CONFIG 3: Base 4MB (JP1 Closed, JP2 Open) */
+/* Range 4MB-12MB */
 Range_4MB_LO = !JP1 &  JP2 & Address:[4..7];
 Range_4MB_HI = !JP1 &  JP2 & Address:[8..11];
 
-/* CONFIG 4: Base 8MB (JP1=1, JP2=1) -> Range 8MB-16MB */
+/* CONFIG 4: Base 8MB (JP1 Open, JP2 Open) */
+/* Range 8MB-16MB */
 Range_8MB_LO =  JP1 &  JP2 & Address:[8..11];
 Range_8MB_HI =  JP1 &  JP2 & Address:[12..15];
 
-/* Combine ranges into Bank Hits */
+/* Combine ranges */
 HIT_LO = Range_1MB_LO # Range_2MB_LO # Range_4MB_LO # Range_8MB_LO;
 HIT_HI = Range_1MB_HI # Range_2MB_HI # Range_4MB_HI # Range_8MB_HI;
 
 /* LOGIC EQUATIONS */
 
-/* Chip Selects: Active when Address Hits & Not Refreshing */
-CS_LO  = HIT_LO & REFRESH;
-CS_HI  = HIT_HI & REFRESH;
+/* Only activate when Valid (Not Refreshing) */
+CS_LO  = HIT_LO & Valid;
+CS_HI  = HIT_HI & Valid;
+TRANS_EN = (HIT_LO # HIT_HI) & Valid;
 
-/* Transceiver Enable: Active for either bank */
-TRANS_EN = (HIT_LO # HIT_HI) & REFRESH;
-
-/* MEMCS16 Implementation (Open Collector Emulation) */
-/* Drive pin LOW (0), but only ENABLE the pin when logic is true */
+/* Open Collector Emulation for ISA Bus Safety */
 MEMCS16    = 'b'0; 
-MEMCS16.oe = (HIT_LO # HIT_HI) & REFRESH;
+MEMCS16.oe = (HIT_LO # HIT_HI) & Valid;
 
-/* NOWS Implementation (Open Collector Emulation) */
-/* Same logic as MEMCS16 */
 NOWS       = 'b'0;
-NOWS.oe    = (HIT_LO # HIT_HI) & REFRESH;
+NOWS.oe    = (HIT_LO # HIT_HI) & Valid;

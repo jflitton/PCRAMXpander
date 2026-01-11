@@ -5,7 +5,7 @@
 	(uuid "1cf6e2a4-b983-419d-81f7-8fbd15ee10a7")
 	(paper "B")
 	(title_block
-		(title "PC RAM Expander 8MB")
+		(title "PCRAMXpander 8MB")
 		(date "1/11/2026")
 		(rev "1.0")
 		(company "Jeff Flitton (jeff@flitton.dev)")
@@ -7969,12 +7969,6 @@
 		(uuid "8b0694f4-e3f5-4b97-8b54-66d465e4bbf0")
 	)
 	(junction
-		(at 41.91 179.07)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "8ca4b5b7-a77b-4875-9163-e04f913b8cf1")
-	)
-	(junction
 		(at 278.13 43.18)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -8149,10 +8143,6 @@
 	(no_connect
 		(at 134.62 254)
 		(uuid "41563090-ab19-4868-9508-5aaec20bd96b")
-	)
-	(no_connect
-		(at 134.62 134.62)
-		(uuid "47a6cd53-3cde-4032-b277-e9b0e72fb91d")
 	)
 	(no_connect
 		(at 134.62 142.24)
@@ -9270,7 +9260,7 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 139.7) (xy 130.81 139.7)
+			(xy 121.92 139.7) (xy 130.81 139.7)
 		)
 		(stroke
 			(width 0)
@@ -9657,16 +9647,6 @@
 			(type default)
 		)
 		(uuid "d3d4f330-0967-46ba-a9a5-1527e42b0924")
-	)
-	(wire
-		(pts
-			(xy 41.91 176.53) (xy 41.91 179.07)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d4887f9a-a06b-4675-aac5-f0d28eab359f")
 	)
 	(wire
 		(pts
@@ -11588,6 +11568,28 @@
 			)
 		)
 	)
+	(global_label "RESET"
+		(shape input)
+		(at 41.91 176.53 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "5a50d690-335e-4f5b-a87b-2504a488eb10")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 33.1797 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "D6"
 		(shape bidirectional)
 		(at 392.43 161.29 0)
@@ -11716,6 +11718,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "RESET"
+		(shape output)
+		(at 134.62 134.62 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "686ae47f-98e2-4127-88bd-afacadf4553b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 125.8897 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -18485,7 +18509,7 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 128.27 139.7 0)
+		(at 121.92 139.7 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -18494,7 +18518,7 @@
 		(fields_autoplaced yes)
 		(uuid "99df1a6c-f49d-4daa-a50e-3d8a19d8c014")
 		(property "Reference" "#PWR024"
-			(at 128.27 143.51 0)
+			(at 121.92 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18503,7 +18527,7 @@
 			)
 		)
 		(property "Value" "+5V"
-			(at 128.27 134.62 0)
+			(at 121.92 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18511,7 +18535,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 128.27 139.7 0)
+			(at 121.92 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18520,7 +18544,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 128.27 139.7 0)
+			(at 121.92 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18529,7 +18553,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 128.27 139.7 0)
+			(at 121.92 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
