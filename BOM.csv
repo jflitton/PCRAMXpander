@@ -1,0 +1,16 @@
+"Id";"Designator";"Footprint";"Quantity";"Designation";"Supplier and ref";
+1;"U2";"SOP50P810X120-48N";1;"SN74LVCR16245ADGGR";;;
+2;"C7,C1,C5,C2,C6,C4,C3";"C_0805_2012Metric_Pad1.18x1.45mm_HandSolder";7;".1 uF";;;
+3;"R2,R1";"R_0805_2012Metric_Pad1.20x1.40mm_HandSolder";2;"10k";;;
+4;"C8,C9";"CAP_PAN_5X11_PAN";2;"47uF";;;
+5;"VR1";"SOT230P700X180-4N";1;"LDL1117S33R";;;
+6;"U3";"DGG0048A_N";1;"SN74LVC16244ADGGR";;;
+7;"J1";"BUS_AT";1;"Bus_ISA_16bit";;;
+8;"U5,U6";"TSOP-I-48_12X20_ALL";2;"AS6C3216A-55TIN";;;
+9;"JP2";"PinHeader_1x02_P2.54mm_Vertical";1;"MB Memory 2";;;
+10;"JP3";"PinHeader_1x02_P2.54mm_Vertical";1;"0WS/Turbo";;;
+11;"JP1";"PinHeader_1x02_P2.54mm_Vertical";1;"MB Memory 1";;;
+12;"U7";"SOP65P640X120-20N";1;"SN74LVC573APWR";;;
+13;"R3";"CSC05_VIS";1;"10k";;;
+14;"U4";"SOP65P640X120-20N";1;"SN74LVC16244A";;;
+15;"U1";"20P3_ATM";1;"ATF16V8B-15PU";;;
