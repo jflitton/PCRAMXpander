@@ -58,7 +58,16 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "malformed_courtyard|153503499|124880998|41696d13-436f-415b-a54b-26cb18c27b93|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "malformed_courtyard|154003498|124380999|41696d13-436f-415b-a54b-26cb18c27b93|00000000-0000-0000-0000-000000000000",
+          ""
+        ]
+      ],
       "meta": {
         "version": 2
       },
@@ -252,6 +261,14 @@
       ],
       [
         "lib_symbol_mismatch|2298700|1866900|03e6a67f-cdbe-45f2-bf2e-f1eebcb49303|00000000-0000-0000-0000-000000000000|||",
+        ""
+      ],
+      [
+        "lib_symbol_mismatch|3289300|1079500|96a1018f-1ae0-4431-8e30-abb613bd9008|00000000-0000-0000-0000-000000000000|||",
+        ""
+      ],
+      [
+        "lib_symbol_mismatch|3327400|1193800|96a1018f-1ae0-4431-8e30-abb613bd9008|00000000-0000-0000-0000-000000000000|||",
         ""
       ],
       [
@@ -694,7 +711,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 1,
         "schematic_color": "rgb(255, 165, 0)",
-        "track_width": 0.6,
+        "track_width": 0.8,
         "via_diameter": 0.8,
         "via_drill": 0.4,
         "wire_width": 30
@@ -750,7 +767,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "gerbers/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",
