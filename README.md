@@ -2,7 +2,7 @@
 
 > **Note:** This project is currently untested. The first batch of boards has been ordered for testing.
 
-An 8MB memory expansion card for the 16-bit ISA bus, designed as a modern alternative to the rare [IBM Memory Expansion board](https://www.ardent-tool.com/memory/IBM_Expansion.html#1_8MB).
+An 8MB memory expansion card for the 16-bit ISA bus, designed as a modern alternative to the somewhat difficult to find ISA version of [IBM's Memory Expansion boards](https://www.ardent-tool.com/memory/IBM_Expansion.html#1_8MB).
 
 ## Features
 
@@ -76,10 +76,6 @@ This work is licensed under the [Creative Commons NonCommercial 4.0 Internationa
 ## Authors
 
 - [Jeff Flitton](mailto:jeff@flitton.dev) – Project creator
-
-## Credits
-
-- [Original PCB design](https://codeberg.org/jgrip/c128-keyboard) by [Johan Grip](https://codeberg.org/jgrip/), creator of the [C128 Neo](https://c128.se/). Minor fit adjustments and latch circuit modifications were made.
 
 ## Disclaimer
 
