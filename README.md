@@ -4,6 +4,8 @@
 
 An 8MB memory expansion card for the 16-bit ISA bus, designed as a modern alternative to the somewhat difficult to find ISA version of [IBM's Memory Expansion boards](https://www.ardent-tool.com/memory/IBM_Expansion.html#1_8MB).
 
+![Rendered PCB (front)](images/3d_rendered_front.png)
+
 This card should likely only be used in systems where the ISA bus is clocked at the same rate as the processor (often the case for 286-based systems).  While this board should work on faster 386 and 486-based systems, this board's memory will significantly underperform the motherboard-attached memory.
 
 ## Features
