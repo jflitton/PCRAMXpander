@@ -18137,7 +18137,7 @@
 				)
 			)
 		)
-		(property "Value" "SN74LVC16244A"
+		(property "Value" "SN74LVC541APWR"
 			(at 264.16 49.53 0)
 			(effects
 				(font
