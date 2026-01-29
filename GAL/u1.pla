@@ -1,0 +1,35 @@
+# Berkeley PLA format generated using
+#
+# CUPL(WM)        5.0a Serial# MW-10400000
+# Device          g16v8ma  Library DLIB-h-40-8
+# Created         Thu Jan 29 14:03:06 2026
+# Name            PCRAMXpander 
+# Partno          U1 
+# Revision        02 
+# Date            2026-01-11 
+# Designer        Jeff Flitton 
+# Company         N/A 
+# Assembly        PCRAMXpander 
+# Location        U1 
+#
+# Inputs  0 1 !CS_HI !CS_LO 
+#         GND_PIN JP1 JP2 LA20 
+#         LA21 LA22 LA23 MEMCS16 
+#         NOWS RESET !TRANS_EN nREFRESH 
+# Outputs !CS_HI !CS_LO MEMCS16 MEMCS16.oe 
+#         NOWS NOWS.oe !TRANS_EN CS_HI.oe 
+#         CS_LO.oe TRANS_EN.oe 
+.i 16
+.o 10
+.p 10
+-------0000--0-1 1~~~~~~~~~
+-------0000--0-1 ~1~~~~~~~~
+1--------------- ~~1~~~~~~~
+-------0000--0-1 ~~~1~~~~~~
+1--------------- ~~~~1~~~~~
+-------0000--0-1 ~~~~~1~~~~
+-------0000--0-1 ~~~~~~1~~~
+-1-------------- ~~~~~~~1~~
+-1-------------- ~~~~~~~~1~
+-1-------------- ~~~~~~~~~1
+.end

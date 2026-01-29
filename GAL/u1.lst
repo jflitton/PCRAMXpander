@@ -1,0 +1,104 @@
+LISTING FOR LOGIC DESCRIPTION FILE: u1.pld                           Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Thu Jan 29 14:03:06 2026
+
+  1:Name     PCRAMXpander ;
+  2:Partno   U1 ;
+  3:Date     2026-01-11 ;
+  4:Revision 02 ;
+  5:Designer Jeff Flitton ;
+  6:Company  N/A ;
+  7:Assembly PCRAMXpander ;
+  8:Location U1 ;
+  9:Device   G16V8 ;
+ 10:
+ 11:/* INPUTS */
+ 12:/* ISA Address Lines LA23..LA20 determine the 1MB block */
+ 13:Pin 1  = LA23;
+ 14:Pin 2  = LA22;
+ 15:Pin 3  = LA21;
+ 16:Pin 4  = LA20;
+ 17:
+ 18:/* Configuration Jumpers */
+ 19:/* Logic: 0 (GND) = Closed, 1 (Pullup) = Open */
+ 20:Pin 5  = JP1;
+ 21:Pin 6  = JP2;
+ 22:
+ 23:/* ISA Control */
+ 24:Pin 7  = nREFRESH; /* ISA REFRESH is Active Low, so this means we're not refreshing when true */
+ 25:Pin 8  = RESET;    /* ISA RESET is Active High */
+ 26:
+ 27:/* Unused/Grounded Pins */
+ 28:Pin 9  = GND_PIN; 
+ 29:
+ 30:/* OUTPUTS */
+ 31:/* Active Low Chip Selects for the RAM banks */
+ 32:Pin 13 = !CS_LO;    
+ 33:Pin 15 = !CS_HI;    
+ 34:Pin 16 = !TRANS_EN; /* Enables U2 (Data buffer) */
+ 35:/* Open Collector Outputs (Emulated via OE control) */
+ 36:Pin 12 = MEMCS16;   
+ 37:Pin 14 = NOWS;      
+ 38:
+ 39:/* DEFINITIONS */
+ 40:FIELD Address = [LA23..LA20];
+ 41:
+ 42:/* Valid Access: */
+ 43:/* 1. nREFRESH is High (Not refreshing) */
+ 44:/* 2. RESET is Low (Not resetting) */
+ 45:Valid = nREFRESH & !RESET;
+ 46:
+ 47:/* CONFIG 1: Base 1MB (JP1 Closed, JP2 Closed) */
+ 48:/* Range 1MB-9MB */
+ 49:Range_1MB_LO = !JP1 & !JP2 & (Address:'h'1 # Address:'h'2 # Address:'h'3 # Address:'h'4);
+ 50:Range_1MB_HI = !JP1 & !JP2 & (Address:'h'5 # Address:'h'6 # Address:'h'7 # Address:'h'8);
+ 51:
+ 52:/* CONFIG 2: Base 2MB (JP1 Open, JP2 Closed) */
+ 53:/* Range 2MB-10MB */
+
+LISTING FOR LOGIC DESCRIPTION FILE: u1.pld                           Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Thu Jan 29 14:03:06 2026
+
+ 54:Range_2MB_LO =  JP1 & !JP2 & (Address:'h'2 # Address:'h'3 # Address:'h'4 # Address:'h'5);
+ 55:Range_2MB_HI =  JP1 & !JP2 & (Address:'h'6 # Address:'h'7 # Address:'h'8 # Address:'h'9);
+ 56:
+ 57:/* CONFIG 3: Base 4MB (JP1 Closed, JP2 Open) */
+ 58:/* Range 4MB-12MB */
+ 59:Range_4MB_LO = !JP1 &  JP2 & (Address:'h'4 # Address:'h'5 # Address:'h'6 # Address:'h'7);
+ 60:Range_4MB_HI = !JP1 &  JP2 & (Address:'h'8 # Address:'h'9 # Address:'h'A # Address:'h'B);
+ 61:
+ 62:/* CONFIG 4: Base 8MB (JP1 Open, JP2 Open) */
+ 63:/* Range 8MB-16MB */
+ 64:Range_8MB_LO =  JP1 &  JP2 & (Address:'h'8 # Address:'h'9 # Address:'h'A # Address:'h'B);
+ 65:Range_8MB_HI =  JP1 &  JP2 & (Address:'h'C # Address:'h'D # Address:'h'E # Address:'h'F);
+ 66:
+ 67:/* Combine ranges */
+ 68:HIT_LO = Range_1MB_LO # Range_2MB_LO # Range_4MB_LO # Range_8MB_LO;
+ 69:HIT_HI = Range_1MB_HI # Range_2MB_HI # Range_4MB_HI # Range_8MB_HI;
+ 70:
+ 71:/* LOGIC EQUATIONS */
+ 72:
+ 73:/* Only activate when Valid (Not Refreshing) */
+ 74:CS_LO  = HIT_LO & Valid;
+ 75:CS_HI  = HIT_HI & Valid;
+ 76:TRANS_EN = (HIT_LO # HIT_HI) & Valid;
+ 77:
+ 78:/* Open Collector Emulation for ISA Bus Safety */
+ 79:MEMCS16    = 'b'0; 
+ 80:MEMCS16.oe = (HIT_LO # HIT_HI) & Valid;
+ 81:
+ 82:NOWS       = 'b'0;
+ 83:NOWS.oe    = (HIT_LO # HIT_HI) & Valid;
+ 84:
+
+
+
+Jedec Fuse Checksum       (297e)
+Jedec Transmit Checksum   (b15a)

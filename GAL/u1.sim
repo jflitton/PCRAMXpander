@@ -1,0 +1,86 @@
+%SIGNAL
+PIN  15 = !CS_HI 
+PIN  13 = !CS_LO 
+PIN   9 =  GND_PIN 
+PIN   5 =  JP1 
+PIN   6 =  JP2 
+PIN   4 =  LA20 
+PIN   3 =  LA21 
+PIN   2 =  LA22 
+PIN   1 =  LA23 
+PIN  12 =  MEMCS16 
+PIN  14 =  NOWS 
+PIN   8 =  RESET 
+PIN  16 = !TRANS_EN 
+PIN   7 =  nREFRESH 
+%END
+
+%FIELD
+FIELD Address = LA23,LA22,LA21,LA20
+%END
+
+%EQUATION
+CS_HI =>
+    !LA20 & !LA21 & !LA22 & !LA23 & !RESET & nREFRESH
+
+CS_LO =>
+    !LA20 & !LA21 & !LA22 & !LA23 & !RESET & nREFRESH
+
+HIT_HI =>
+    !LA20 & !LA21 & !LA22 & !LA23
+
+HIT_LO =>
+    !LA20 & !LA21 & !LA22 & !LA23
+
+MEMCS16 =>
+    0 
+
+MEMCS16.oe  =>
+    !LA20 & !LA21 & !LA22 & !LA23 & !RESET & nREFRESH
+
+NOWS =>
+    0 
+
+NOWS.oe  =>
+    !LA20 & !LA21 & !LA22 & !LA23 & !RESET & nREFRESH
+
+Range_1MB_HI =>
+    !JP1 & !JP2 & !LA20 & !LA21 & !LA22 & !LA23
+
+Range_1MB_LO =>
+    !JP1 & !JP2 & !LA20 & !LA21 & !LA22 & !LA23
+
+Range_2MB_HI =>
+    JP1 & !JP2 & !LA20 & !LA21 & !LA22 & !LA23
+
+Range_2MB_LO =>
+    JP1 & !JP2 & !LA20 & !LA21 & !LA22 & !LA23
+
+Range_4MB_HI =>
+    !JP1 & JP2 & !LA20 & !LA21 & !LA22 & !LA23
+
+Range_4MB_LO =>
+    !JP1 & JP2 & !LA20 & !LA21 & !LA22 & !LA23
+
+Range_8MB_HI =>
+    JP1 & JP2 & !LA20 & !LA21 & !LA22 & !LA23
+
+Range_8MB_LO =>
+    JP1 & JP2 & !LA20 & !LA21 & !LA22 & !LA23
+
+TRANS_EN =>
+    !LA20 & !LA21 & !LA22 & !LA23 & !RESET & nREFRESH
+
+Valid =>
+    !RESET & nREFRESH
+
+CS_HI.oe  =>
+    1 
+
+CS_LO.oe  =>
+    1 
+
+TRANS_EN.oe  =>
+    1 
+
+%END

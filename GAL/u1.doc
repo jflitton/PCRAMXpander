@@ -1,0 +1,236 @@
+
+*******************************************************************************
+                                 PCRAMXpander
+*******************************************************************************
+
+CUPL(WM)        5.0a Serial# MW-10400000
+Device          g16v8ma  Library DLIB-h-40-8
+Created         Thu Jan 29 14:03:06 2026
+Name            PCRAMXpander 
+Partno          U1 
+Revision        02 
+Date            2026-01-11 
+Designer        Jeff Flitton 
+Company         N/A 
+Assembly        PCRAMXpander 
+Location        U1 
+
+===============================================================================
+                            Expanded Product Terms
+===============================================================================
+
+Address =>
+    LA23 , LA22 , LA21 , LA20
+
+CS_HI =>
+    !LA20 & !LA21 & !LA22 & !LA23 & !RESET & nREFRESH
+
+CS_LO =>
+    !LA20 & !LA21 & !LA22 & !LA23 & !RESET & nREFRESH
+
+HIT_HI =>
+    !LA20 & !LA21 & !LA22 & !LA23
+
+HIT_LO =>
+    !LA20 & !LA21 & !LA22 & !LA23
+
+MEMCS16 =>
+    0 
+
+MEMCS16.oe  =>
+    !LA20 & !LA21 & !LA22 & !LA23 & !RESET & nREFRESH
+
+NOWS =>
+    0 
+
+NOWS.oe  =>
+    !LA20 & !LA21 & !LA22 & !LA23 & !RESET & nREFRESH
+
+Range_1MB_HI =>
+    !JP1 & !JP2 & !LA20 & !LA21 & !LA22 & !LA23
+
+Range_1MB_LO =>
+    !JP1 & !JP2 & !LA20 & !LA21 & !LA22 & !LA23
+
+Range_2MB_HI =>
+    JP1 & !JP2 & !LA20 & !LA21 & !LA22 & !LA23
+
+Range_2MB_LO =>
+    JP1 & !JP2 & !LA20 & !LA21 & !LA22 & !LA23
+
+Range_4MB_HI =>
+    !JP1 & JP2 & !LA20 & !LA21 & !LA22 & !LA23
+
+Range_4MB_LO =>
+    !JP1 & JP2 & !LA20 & !LA21 & !LA22 & !LA23
+
+Range_8MB_HI =>
+    JP1 & JP2 & !LA20 & !LA21 & !LA22 & !LA23
+
+Range_8MB_LO =>
+    JP1 & JP2 & !LA20 & !LA21 & !LA22 & !LA23
+
+TRANS_EN =>
+    !LA20 & !LA21 & !LA22 & !LA23 & !RESET & nREFRESH
+
+Valid =>
+    !RESET & nREFRESH
+
+CS_HI.oe  =>
+    1 
+
+CS_LO.oe  =>
+    1 
+
+TRANS_EN.oe  =>
+    1 
+
+
+===============================================================================
+                                 Symbol Table
+===============================================================================
+
+Pin Variable                                    Pterms   Max     Min    
+Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
+--- --------            ---     ---     ----    ------  ------  -----   
+
+    Address                     0        F        -       -       -     
+ !  CS_HI                       15       V        1       7       1     
+ !  CS_LO                       13       V        1       7       1     
+    GND_PIN                     9        V        -       -       -     
+    HIT_HI                      0        I        1       -       -     
+    HIT_LO                      0        I        1       -       -     
+    JP1                         5        V        -       -       -     
+    JP2                         6        V        -       -       -     
+    LA20                        4        V        -       -       -     
+    LA21                        3        V        -       -       -     
+    LA22                        2        V        -       -       -     
+    LA23                        1        V        -       -       -     
+    MEMCS16                     12       V        1       7       1     
+    MEMCS16             oe      12       X        1       1       1     
+    NOWS                        14       V        1       7       1     
+    NOWS                oe      14       X        1       1       1     
+    RESET                       8        V        -       -       -     
+    Range_1MB_HI                0        I        1       -       -     
+    Range_1MB_LO                0        I        1       -       -     
+    Range_2MB_HI                0        I        1       -       -     
+    Range_2MB_LO                0        I        1       -       -     
+    Range_4MB_HI                0        I        1       -       -     
+    Range_4MB_LO                0        I        1       -       -     
+    Range_8MB_HI                0        I        1       -       -     
+    Range_8MB_LO                0        I        1       -       -     
+ !  TRANS_EN                    16       V        1       7       1     
+    Valid                       0        I        1       -       -     
+    nREFRESH                    7        V        -       -       -     
+    CS_HI               oe      15       D        1       1       0     
+    CS_LO               oe      13       D        1       1       0     
+    TRANS_EN            oe      16       D        1       1       0     
+
+
+LEGEND    D : default variable         F : field      G : group
+          I : intermediate variable    N : node       M : extended node
+          U : undefined                V : variable   X : extended variable
+          T : function
+
+
+===============================================================================
+                                   Fuse Plot
+===============================================================================
+
+Syn   02192 - Ac0   02193 - 
+
+Pin #19  02048  Pol x  02120  Ac1 - 
+ 00000 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00032 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00064 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00096 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00128 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00160 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00192 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00224 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #18  02049  Pol x  02121  Ac1 - 
+ 00256 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00288 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00320 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00352 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00384 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00416 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00448 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00480 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #17  02050  Pol x  02122  Ac1 - 
+ 00512 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00544 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00576 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00608 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00640 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00672 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00704 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00736 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #16  02051  Pol x  02123  Ac1 - 
+ 00768 -------------------------------- 
+ 00800 -x-x-x---x----------x----x------ 
+ 00832 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00864 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00896 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00928 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00960 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00992 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #15  02052  Pol x  02124  Ac1 - 
+ 01024 -------------------------------- 
+ 01056 -x-x-x---x----------x----x------ 
+ 01088 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01120 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01152 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01184 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01216 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01248 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #14  02053  Pol -  02125  Ac1 - 
+ 01280 -x-x-x---x----------x----x------ 
+ 01312 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01344 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01376 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01408 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01440 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01472 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01504 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #13  02054  Pol x  02126  Ac1 - 
+ 01536 -------------------------------- 
+ 01568 -x-x-x---x----------x----x------ 
+ 01600 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01632 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01664 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01696 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01728 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01760 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #12  02055  Pol -  02127  Ac1 - 
+ 01792 -x-x-x---x----------x----x------ 
+ 01824 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01856 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01888 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01920 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01952 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01984 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+
+
+LEGEND    X : fuse not blown 
+          - : fuse blown 
+
+===============================================================================
+                                 Chip Diagram
+===============================================================================
+
+                               ______________
+                              | PCRAMXpander |
+                     LA23 x---|1           20|---x Vcc                      
+                     LA22 x---|2           19|---x                          
+                     LA21 x---|3           18|---x                          
+                     LA20 x---|4           17|---x                          
+                      JP1 x---|5           16|---x !TRANS_EN                
+                      JP2 x---|6           15|---x !CS_HI                   
+                 nREFRESH x---|7           14|---x NOWS                     
+                    RESET x---|8           13|---x !CS_LO                   
+                  GND_PIN x---|9           12|---x MEMCS16                  
+                      GND x---|10          11|---x                          
+                              |______________|
+
